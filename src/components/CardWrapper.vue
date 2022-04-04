@@ -1,12 +1,43 @@
 <template>
 <div class="wrapper">
+  <div class="input__wrapper">
+    <div class="input">
+      <p>Добавить заголовок</p>
+      <input v-model="titleNew" type="text">
+    </div>
+
+    <div class="input">
+      <p>Добавить текст</p>
+      <input v-model="textNew" type="text">
+    </div>
+
+    <div class="input">
+      <p>Добавить цену</p>
+      <input v-model="priceNew" type="text">
+    </div>
+
+    <div class="basket">
+      <p>Корзина</p>
+      <img src="../assets/basket.png" />
+    </div>
+  </div>
+
+  <h2>Добавить карточку</h2>
+
   <div @click="addCard" class="plus">
     <img src="../assets/plus.png">
   </div>
-  <input v-model="titleNew" type="text">
-  <input v-model="textNew" type="text">
+
+  <div class="count-card">
+    <p>Всего карточек:</p>
+    <p>{{items.length}}</p>
+  </div>
+
   <div class="card">
-    <app-card :title="item.title" :text="item.text" v-for="(item, i) in items" :key="i" @deleteCard="deleteCard(i)"></app-card>
+    <app-card :title="item.title" :text="item.text" :price="item.price" v-for="(item, i) in items" :key="i" @deleteCard="deleteCard(i)"></app-card>
+  </div>
+  <div class="busket__wrapper">
+    <h2>Корзина</h2>
   </div>
 </div>
 </template>
@@ -22,11 +53,12 @@ export default {
   data(){
     return{
     items: [
-      {title:"title1", text:"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce eleifend lorem elit, vitae tristique mi dictum sagittis. Aliquam egestas arcu ac nisl convallis, sit amet maximus quam gravida1"},
-      {title:"title2", text:"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce eleifend lorem elit, vitae tristique mi dictum sagittis. Aliquam egestas arcu ac nisl convallis, sit amet maximus quam gravida2"}
+      {title:"title1", price:"1000$", text:"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce eleifend lorem elit, vitae tristique mi dictum sagittis. Aliquam egestas arcu ac nisl convallis, sit amet maximus quam gravida1"},
+      {title:"title2", price:"2000$", text:"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce eleifend lorem elit, vitae tristique mi dictum sagittis. Aliquam egestas arcu ac nisl convallis, sit amet maximus quam gravida2"}
     ],
     titleNew: '',
-    textNew: ''
+    textNew: '',
+    priceNew: '',
     }
   },
   props: {
@@ -34,7 +66,7 @@ export default {
   },
   methods: {
     addCard() {
-      this.items.push({title: this.titleNew, text: this.textNew});
+      this.items.push({title: this.titleNew, text: this.textNew, price: this.priceNew});
     },
     deleteCard(i) {
       this.items.splice(i, 1)
@@ -45,7 +77,32 @@ export default {
 
 <style lang="scss" scoped>
 .plus{
-  width: 50px;
+  width: 40px;
   margin: 50px auto;
+  background-color: #FFF;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 15px;
+}
+.input__wrapper{
+  display: flex;
+  justify-content: center;
+  .input{
+    margin: 20px;
+    input{
+        background-color: #FFF;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+        border-radius: 15px;
+    }
+  }
+  .basket{
+    margin: 20px 70px;
+    width: 24px;
+  }
+}
+h2{
+  text-align: center;
+}
+.count-card{
+  text-align:center;
 }
 </style>

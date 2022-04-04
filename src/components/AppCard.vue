@@ -7,7 +7,14 @@
       <div class="card__info">
         <h2>{{title}}</h2>
         <p>{{text}}</p>
+        <p>{{price}}</p>
       </div>
+      
+      <div class="basket__info">
+        <input type="text" />
+        <img src="../assets/basket.png">
+      </div>
+
       <div @click="$emit('deleteCard')" class="cross">
         <img src="../assets/cross.png" />
       </div>
@@ -23,17 +30,22 @@ export default {
       hi: "Привет"
     }
   },
-  props: ['title', 'text']
+  props: ['title', 'text', 'price']
 }
 </script>
 
 
 <style lang="scss" scoped>
-
+input{
+  margin-left: 20px;
+  background-color: #FFF;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 15px;
+}
 .card{
   background-color: #FFF;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-  width: 1500px;
+  width: 800px;
   margin: 40px auto;
   padding: 10px;
   .card__background{
@@ -54,10 +66,18 @@ export default {
       }
     }
     .cross{
-      margin: 0 40px;
+      margin: 0 10px 0 30px;
       width: 70px;
     }
   }
+  .basket__info{
+    display: flex;
+    img{
+      margin-left: 20px;
+      width: 30px;
+    }
+  }
 }
+
 
 </style>
