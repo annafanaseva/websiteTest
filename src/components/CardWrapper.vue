@@ -9,6 +9,7 @@
     <div class="input">
       <p>Добавить текст</p>
       <input v-model="textNew" type="text">
+      <p>{{textNew}}</p>
     </div>
 
     <div class="input">
@@ -17,8 +18,9 @@
     </div>
 
     <div class="basket">
-      <p>Корзина</p>
+      <p>Корзина:</p>
       <img src="../assets/basket.png" />
+      <p></p>
     </div>
   </div>
 
@@ -29,15 +31,15 @@
   </div>
 
   <div class="count-card">
-    <p>Всего карточек:</p>
-    <p>{{items.length}}</p>
+    <p>Всего карточек: {{items.length}}</p>
   </div>
 
   <div class="card">
-    <app-card :title="item.title" :text="item.text" :price="item.price" v-for="(item, i) in items" :key="i" @deleteCard="deleteCard(i)"></app-card>
+    <app-card :countPrice='basketSum' :title="item.title" :text="item.text" :price="item.price" v-for="(item, i) in items" :key="i" @deleteCard="deleteCard(i)"></app-card>
   </div>
-  <div class="busket__wrapper">
-    <h2>Корзина</h2>
+  <div class="basket__wrapper">
+    <h2>Корзина: </h2>
+    <h3>Товары на сумму: </h3>
   </div>
 </div>
 </template>
@@ -53,12 +55,11 @@ export default {
   data(){
     return{
     items: [
-      {title:"title1", price:"1000$", text:"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce eleifend lorem elit, vitae tristique mi dictum sagittis. Aliquam egestas arcu ac nisl convallis, sit amet maximus quam gravida1"},
-      {title:"title2", price:"2000$", text:"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce eleifend lorem elit, vitae tristique mi dictum sagittis. Aliquam egestas arcu ac nisl convallis, sit amet maximus quam gravida2"}
+      {title:"title1", price:'1000', text:"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce eleifend lorem elit, vitae tristique mi dictum sagittis. Aliquam egestas arcu ac nisl convallis, sit amet maximus quam gravida1"},
+      {title:"title2", price:'2000', text:"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce eleifend lorem elit, vitae tristique mi dictum sagittis. Aliquam egestas arcu ac nisl convallis, sit amet maximus quam gravida2"}
     ],
     titleNew: '',
     textNew: '',
-    priceNew: '',
     }
   },
   props: {
@@ -69,7 +70,10 @@ export default {
       this.items.push({title: this.titleNew, text: this.textNew, price: this.priceNew});
     },
     deleteCard(i) {
-      this.items.splice(i, 1)
+      this.items.splice(i, 1);
+    },
+    basketSum(data) {
+      console.log(data)
     }
   }
 }

@@ -7,18 +7,24 @@
       <div class="card__info">
         <h2>{{title}}</h2>
         <p>{{text}}</p>
-        <p>{{price}}</p>
+        <p>Цена за один товар: {{price}}$</p>
+        <p>Итоговая стомость: {{totalPrice=calculate * price}}$</p>
       </div>
       
       <div class="basket__info">
-        <input type="text" />
-        <img src="../assets/basket.png">
+      
+        <input type="text" v-model="calculate">
+        <img src="../assets/basket.png" @click='countPrice()'>
+
       </div>
+      
 
       <div @click="$emit('deleteCard')" class="cross">
         <img src="../assets/cross.png" />
       </div>
+
     </div>
+
   </div>
 </template>
 
@@ -27,17 +33,27 @@ export default {
   name: 'AppCard',
   data() {
     return{
-      hi: "Привет"
+      totalPrice: '',
+      calculate:'',
     }
   },
-  props: ['title', 'text', 'price']
+  methods:{
+    countPrice () {
+      this.basketSum( {
+        totalPrice: this.totalPrice
+      })
+    }
+  },
+  props: ['title', 'text', 'price', 'busketSum']
 }
 </script>
 
 
 <style lang="scss" scoped>
+
 input{
   margin-left: 20px;
+  width: 70px;
   background-color: #FFF;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
   border-radius: 15px;
