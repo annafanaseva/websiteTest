@@ -1,16 +1,5 @@
-import Vue from 'vue'
-import App from './App.vue'
-// import router from 'vue-router';
+import {createApp} from 'vue' //подключается Vue JS
+import App from './App.vue' // подключается основной компонент
 
-// function a() {
-//     function b() {
-//         console.log(this);
-//     }
-//     b()
-// }
-// a();
-
-new Vue({
-    render: h => h(App)
-  }).$mount('#app')
+createApp(App).mount('#app'); //монтируется в DOM вместо блока #app
   
