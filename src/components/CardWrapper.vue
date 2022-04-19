@@ -13,6 +13,13 @@
 
           <div class="form__input">
             <label
+              >Add id
+              <input v-model="idNew" type="text" />
+            </label>
+          </div>
+
+          <div class="form__input">
+            <label
               >Add text
               <input v-model="textNew" type="text" />
             </label>
@@ -50,7 +57,17 @@
     </div>
     <div class="basket__wrapper">
       <h2>Cart:</h2>
-      <div v-html="cartList"></div>
+      <!-- <div v-for="el in cart" :key="el.title">
+        {{ el.title }}
+      </div> -->
+      <div>{{ cart }}</div>
+      <div>
+        <ul>
+          <li v-for="el in cart[items.id]" :key="el.title">
+            {{el.title}}
+          </li>
+        </ul>
+      </div>
       <h3>Total price:</h3>
     </div>
   </div>
@@ -69,21 +86,25 @@ export default {
       items: [
         {
           title: "Title",
+          id: 1,
           price: 1000,
           text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce eleifend lorem elit, vitae tristique mi dictum sagittis. Aliquam egestas arcu ac nisl convallis, sit amet maximus quam gravida1",
         },
         {
           title: "Title",
+          id: 2,
           price: 2000,
           text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce eleifend lorem elit, vitae tristique mi dictum sagittis. Aliquam egestas arcu ac nisl convallis, sit amet maximus quam gravida2",
         },
       ],
       titleNew: "",
       textNew: "",
+      priceNew: "",
+      idNew: "",
       cart: [
-        { title: "title1", price: 2000, amount: 2 },
-        { title: "title2", price: 1000, amount: 1 },
-        { title: "title1", price: 2000, amount: 1 },
+        // { title: "title1", price: 2000, amount: 2 },
+        // { title: "title2", price: 1000, amount: 1 },
+        // { title: "title1", price: 2000, amount: 1 },
       ],
     };
   },
@@ -96,6 +117,7 @@ export default {
         title: this.titleNew,
         text: this.textNew,
         price: this.priceNew,
+        id: this.idNew,
       });
     },
     deleteCard(i) {
@@ -105,31 +127,35 @@ export default {
       console.log(data);
     },
     updateCart(item, amount) {
-      this.cart.push({
+      let result = "";
+      this.cart[item.id] = {
+        id: item.id,
         title: item.title,
         price: item.price,
         amount: amount,
-      });
+      };
+      console.log(this.cart[item.id]);
+      return result;
     },
   },
   computed: {
     cartList() {
-      if (this.cart.length === 0) {
-        return "Нет товаров";
+      if (Object.keys(this.cart).length === 0) {
+        return "Ampty";
       }
 
       let result = "";
 
-      this.cart.forEach((element) => {
-        result =
-          result +
-          element.title +
-          " " +
-          element.amount +
-          " x " +
-          element.price +
-          "<br>";
-      });
+      // this.cart.forEach((element) => {
+      //   result =
+      //     result +
+      //     element.title +
+      //     " " +
+      //     element.amount +
+      //     " x " +
+      //     element.price +
+      //     "<br>";
+      // });
 
       return result;
     },
