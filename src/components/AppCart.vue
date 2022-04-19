@@ -9,12 +9,12 @@
         <p>{{ item.text }}</p>
         <p>Price for one: {{ item.price }}$</p>
         <p>Total price: {{ getTotalPrice }}$</p>
+        <div @click="addToCart(amount)" class="card__button">Add to a cart</div>
       </div>
 
       <div class="basket__info">
         <p class="basket__label">Type the number</p>
         <input type="text" v-model="amount" />
-        <div @click="addToCart(amount)" class="card__button">Add to a cart</div>
       </div>
 
       <div @click="$emit('deleteCard')" class="cross">
@@ -55,7 +55,7 @@ export default {
   background-color: #fff;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
   width: 800px;
-  height: 300px;
+  height: 400px;
   margin: 40px auto;
   padding: 10px;
   display: flex;
@@ -82,8 +82,6 @@ export default {
     }
   }
   &__button {
-    text-align: center;
-    margin-top: 20px;
     padding: 10px 15px 10px 15px;
     background: #f24e1e;
     border-radius: 15px;
