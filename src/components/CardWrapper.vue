@@ -41,10 +41,9 @@
       </div>
     </div>
 
-    <!-- <div class="count-card">
+    <div class="count-card">
       <p>Всего карточек: {{ items.length }}</p>
-    </div> -->
-
+    </div>
     <div class="card">
       <app-card
         v-for="(item, i) in items"
@@ -55,20 +54,29 @@
         @addToCart="updateCart"
       ></app-card>
     </div>
-    <div class="basket__wrapper">
-      <h2>Cart:</h2>
-      <!-- <div v-for="el in cart" :key="el.title">
-        {{ el.title }}
-      </div> -->
-      <div>{{ cart }}</div>
+    <div class="basket-wrapper">
+      <h2 class="title">Cart:</h2>
+      <!-- <div v-html="cartList"></div> -->
+      <div class="basket-cards">
+        <div class="basket-card" v-for="el in cart" :key=" el.id ">
+          <div class="basket-card__title">Name: {{ el.title }}</div>
+          <div class="basket-card__amount">Amount: {{ el.amount }}</div>
+          <div class="basket-card__price">Price: {{ el.price }}</div>
+          <div class="basket-card__total">
+            Total price: {{ el.price * el.amount }}
+          </div>
+        </div>
+      </div>
+      <div v-if="Object.keys(this.cart).length == 0">Ampty</div>
+      <button class="basket-button">Calculate total price</button>
       <div>
         <ul>
           <li v-for="el in cart[items.id]" :key="el.title">
-            {{el.title}}
+            {{ el.title }}
           </li>
         </ul>
       </div>
-      <h3>Total price:</h3>
+      <h3 class="title">Total price:</h3>
     </div>
   </div>
 </template>
@@ -85,14 +93,14 @@ export default {
     return {
       items: [
         {
-          title: "Title",
           id: 1,
+          title: "Title",
           price: 1000,
           text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce eleifend lorem elit, vitae tristique mi dictum sagittis. Aliquam egestas arcu ac nisl convallis, sit amet maximus quam gravida1",
         },
         {
-          title: "Title",
           id: 2,
+          title: "Title",
           price: 2000,
           text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce eleifend lorem elit, vitae tristique mi dictum sagittis. Aliquam egestas arcu ac nisl convallis, sit amet maximus quam gravida2",
         },
@@ -127,38 +135,41 @@ export default {
       console.log(data);
     },
     updateCart(item, amount) {
-      let result = "";
       this.cart[item.id] = {
         id: item.id,
         title: item.title,
         price: item.price,
         amount: amount,
       };
-      console.log(this.cart[item.id]);
-      return result;
+      console.log(this.cart);
     },
+    // totalSum(price, amount) {
+    // let sum;
+    // sum = sum + price * amount;
+    // // return totalPrice;
+    // console.log(1);
+    // console.log(sum);
+    // },
   },
   computed: {
-    cartList() {
-      if (Object.keys(this.cart).length === 0) {
-        return "Ampty";
-      }
+    // cartList() {
+    //   // if (Object.keys(this.cart).length === 0) {
+    //   //   return "Ampty";
+    //   // }
+    //   let result = "";
 
-      let result = "";
-
-      // this.cart.forEach((element) => {
-      //   result =
-      //     result +
-      //     element.title +
-      //     " " +
-      //     element.amount +
-      //     " x " +
-      //     element.price +
-      //     "<br>";
-      // });
-
-      return result;
-    },
+    //   this.cart.forEach((element) => {
+    //     result =
+    //       result +
+    //       element.title +
+    //       " " +
+    //       element.amount +
+    //       " x " +
+    //       element.price +
+    //       "<br>";
+    //   });
+    //   return result;
+    // },
   },
 };
 </script>
@@ -212,6 +223,39 @@ export default {
     margin: 24px auto;
     width: 210px;
     box-shadow: 0px 6px 10px rgba(#f24e1e, 0.4);
+  }
+}
+
+.title {
+  font-size: 24px;
+  color: #f24e1e;
+  margin: 20px 0;
+}
+.basket {
+  &-wrapper {
+  }
+  &-cards {
+    display: flex;
+    justify-content: center;
+  }
+  &-card {
+    border: 1px solid #f8b3b8;
+    border-radius: 15px;
+    max-width: 200px;
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    padding: 10px;
+  }
+  &-button {
+    margin-top: 20px;
+    background: #f8b3b8;
+    border-radius: 10px;
+    border: none;
+    padding: 10px 15px;
+    color: #fff;
+    font-size: 18px;
   }
 }
 </style>
