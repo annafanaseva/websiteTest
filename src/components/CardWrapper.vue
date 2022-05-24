@@ -58,7 +58,7 @@
       <h2 class="title">Cart:</h2>
       <!-- <div v-html="cartList"></div> -->
       <div class="basket-cards">
-        <div class="basket-card" v-for="el in cart" :key=" el.id ">
+        <div class="basket-card" v-for="el in cart" :key="el.id">
           <div class="basket-card__title">Name: {{ el.title }}</div>
           <div class="basket-card__amount">Amount: {{ el.amount }}</div>
           <div class="basket-card__price">Price: {{ el.price }}</div>
@@ -109,11 +109,7 @@ export default {
       textNew: "",
       priceNew: "",
       idNew: "",
-      cart: [
-        // { title: "title1", price: 2000, amount: 2 },
-        // { title: "title2", price: 1000, amount: 1 },
-        // { title: "title1", price: 2000, amount: 1 },
-      ],
+      cart: {},
     };
   },
   props: {
@@ -143,13 +139,13 @@ export default {
       };
       console.log(this.cart);
     },
-    // totalSum(price, amount) {
-    // let sum;
-    // sum = sum + price * amount;
-    // // return totalPrice;
-    // console.log(1);
-    // console.log(sum);
-    // },
+    totalSum(price, amount) {
+    let sum;
+    sum = sum + price * amount;
+    // return totalPrice;
+    console.log(1);
+    console.log(sum);
+    },
   },
   computed: {
     // cartList() {
@@ -157,7 +153,6 @@ export default {
     //   //   return "Ampty";
     //   // }
     //   let result = "";
-
     //   this.cart.forEach((element) => {
     //     result =
     //       result +
@@ -213,6 +208,8 @@ export default {
       border: 1px solid #f24e1e;
       box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
       border-radius: 15px;
+      padding-left: 10px;
+      color: #f24e1e;
     }
   }
   &__plus {
@@ -223,6 +220,7 @@ export default {
     margin: 24px auto;
     width: 210px;
     box-shadow: 0px 6px 10px rgba(#f24e1e, 0.4);
+    cursor: pointer;
   }
 }
 
@@ -256,6 +254,7 @@ export default {
     padding: 10px 15px;
     color: #fff;
     font-size: 18px;
+    cursor: pointer;
   }
 }
 </style>

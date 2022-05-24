@@ -57,6 +57,7 @@ body{
     .link{
       margin: 0 40px;
       font-size: 20px;
+      cursor: pointer;
     }
   }
 }

@@ -49,7 +49,6 @@ export default {
 
 
 <style lang="scss" scoped>
-
 .card {
   position: relative;
   background-color: #fff;
@@ -88,6 +87,7 @@ export default {
     background: #f24e1e;
     border-radius: 15px;
     color: #fff;
+    cursor: pointer;
     box-shadow: 0px 6px 10px rgba(#f24e1e, 0.4);
   }
   .cross {
@@ -95,6 +95,7 @@ export default {
     right: 20px;
     top: 20px;
     width: 20px;
+    cursor: pointer;
   }
 }
 
@@ -111,6 +112,7 @@ export default {
       box-shadow: 0px 4px 8px rgba(#f24e1e, 0.2);
       border-radius: 15px;
       color: #f24e1e;
+      padding-left: 10px;
     }
     p {
       color: #f24e1e;
